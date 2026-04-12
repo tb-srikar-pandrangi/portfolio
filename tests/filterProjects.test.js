@@ -12,15 +12,25 @@ describe('filterProjects', () => {
     expect(filterProjects(mockProjects, 'All')).toHaveLength(3)
   })
 
-  it('returns only matching projects for a category', () => {
+  it('filters correctly when a project belongs to multiple categories', () => {
     const result = filterProjects(mockProjects, 'Brand')
     expect(result).toHaveLength(1)
     expect(result[0].id).toBe('b')
   })
 
-  it('returns empty array when no category matches', () => {
+  it('filters correctly when a project belongs to a single category', () => {
     const result = filterProjects(mockProjects, 'Growth')
     expect(result).toHaveLength(1)
     expect(result[0].id).toBe('c')
+  })
+
+  it('returns empty array when no projects match the category', () => {
+    expect(filterProjects(mockProjects, 'NonExistent')).toHaveLength(0)
+  })
+
+  it('returns multiple projects when several match the category', () => {
+    const result = filterProjects(mockProjects, 'AI/Automation')
+    expect(result).toHaveLength(1)
+    expect(result[0].id).toBe('a')
   })
 })
