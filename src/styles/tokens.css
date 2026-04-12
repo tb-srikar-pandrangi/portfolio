@@ -1,0 +1,13 @@
+:root {
+  --bg: #F5F2ED;
+  --text: #1A1A1A;
+  --accent: #C4622D;
+  --muted: #8A8580;
+  --surface: #EDEAE4;
+  --border: #D8D4CE;
+
+  --font: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --sidebar-width: 220px;
+  --section-pad-y: 120px;
+}
