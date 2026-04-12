@@ -6,7 +6,8 @@
   --surface: #EDEAE4;
   --border: #D8D4CE;
 
-  --font: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font: 'Satoshi', -apple-system, BlinkMacSystemFont, 'system-ui', sans-serif;
+  --transition: 200ms ease;
 
   --sidebar-width: 220px;
   --section-pad-y: 120px;

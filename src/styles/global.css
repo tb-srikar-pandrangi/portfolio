@@ -6,8 +6,10 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -31,6 +33,10 @@ img {
 
 button {
   font-family: var(--font);
+  border: none;
+  background: none;
+  cursor: pointer;
+  appearance: none;
 }
 
 @media (max-width: 767px) {
