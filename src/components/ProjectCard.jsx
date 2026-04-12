@@ -7,7 +7,7 @@ export function ProjectCard({ project, featured = false }) {
       target="_blank"
       rel="noopener noreferrer"
       style={{
-        gridColumn: `span ${colSpan || 1}`,
+        gridColumn: `span ${colSpan ?? 1}`,
         display: 'block',
         backgroundColor: 'var(--surface)',
         border: '1px solid var(--border)',

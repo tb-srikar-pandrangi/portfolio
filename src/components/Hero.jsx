@@ -31,7 +31,7 @@ export function Hero() {
             width={72}
             height={72}
             style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-            onError={e => { e.target.style.display = 'none' }}
+            onError={e => { e.target.parentElement.style.display = 'none' }}
           />
         </div>
 

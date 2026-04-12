@@ -42,7 +42,7 @@ export function Sidebar() {
             <a
               key={id}
               href={`#${id}`}
-              style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+              style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
             >
               <span style={{
                 width: '8px',

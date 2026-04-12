@@ -6,8 +6,6 @@ import { About } from './components/About'
 import { Resume } from './components/Resume'
 import { Contact } from './components/Contact'
 
-const SIDEBAR_WIDTH = 220
-
 export default function App() {
   return (
     <>
@@ -31,7 +29,7 @@ export default function App() {
         @media (min-width: 768px) {
           .sidebar-wrapper { display: block; }
           .topbar-wrapper { display: none; }
-          .main-content { margin-left: ${SIDEBAR_WIDTH}px; }
+          .main-content { margin-left: var(--sidebar-width); }
         }
       `}</style>
     </>

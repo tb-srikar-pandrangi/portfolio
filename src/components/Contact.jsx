@@ -65,6 +65,7 @@ export function Contact() {
         <style>{`
           @media (max-width: 767px) {
             #contact { padding: var(--section-pad-y) 24px; }
+            footer { padding: 24px; }
           }
         `}</style>
       </section>
