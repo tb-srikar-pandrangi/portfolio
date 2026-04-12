@@ -1,9 +1,8 @@
 // REPLACE href values with actual links
 const links = [
-  { label: 'Email', href: 'mailto:hello@srikarpandrangi.com' },
+  { label: 'Email', href: 'mailto:srikarpandrangi121@gmail.com' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/srikarpandrangi' },
-  { label: 'GitHub', href: 'https://github.com/srikarpandrangi' },
-  { label: 'Twitter/X', href: 'https://twitter.com/srikarpandrangi' },
+  { label: 'GitHub', href: 'https://github.com/tb-srikar-pandrangi' }
 ]
 
 export function Contact() {
