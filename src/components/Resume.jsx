@@ -1,15 +1,13 @@
 // REPLACE these arrays with actual resume content from user
 const experience = [
-  { company: 'Untitled Creatives', title: 'Founder', year: '2023–Present' },
-  { company: 'D2C Brand (co-founded)', title: 'Co-founder', year: '2022–2023' },
-  { company: 'Zuddl', title: 'GTM Consultant', year: '2022' },
-  { company: 'Capgemini', title: 'GTM Consulting', year: '2021' },
+  { company: 'Untitled Creatives', title: 'Founder', year: '2024–Present' },
+  { company: 'Capgemini', title: 'Associate Consultant', year: '2022-23' },
 ]
 
 const education = [
-  { institution: 'Mesa School of Business', program: 'PGP Startup Leadership', year: '2024–Present' },
-  { institution: 'NIT Warangal', program: 'B.Tech Mechanical Engineering', year: '2017–2021' },
-  { institution: 'CAT', program: '99.3 percentile', year: '2023' },
+  { institution: 'Mesa School of Business', program: 'PGP Startup Leadership', year: '2025–Present' },
+  { institution: 'NIT Warangal', program: 'B.Tech Mechanical Engineering', year: '2018–2022' },
+  { institution: 'CAT', program: '99.3 percentile', year: '2024' },
 ]
 
 function TimelineItem({ primary, secondary, year }) {
