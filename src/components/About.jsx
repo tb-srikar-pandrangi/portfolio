@@ -84,7 +84,7 @@ export function About() {
             marginBottom: '24px',
           }}>
             <img
-              src="/assets/photo-full.jpg"
+              src="/Image.png"
               alt="Srikar Pandrangi presenting"
               loading="lazy"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}

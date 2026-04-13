@@ -26,7 +26,7 @@ export function Hero() {
           backgroundColor: 'var(--surface)',
         }}>
           <img
-            src="/assets/photo-circle.jpg"
+            src="/Image.png"
             alt="Srikar Pandrangi"
             width={72}
             height={72}
