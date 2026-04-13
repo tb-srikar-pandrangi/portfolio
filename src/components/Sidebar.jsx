@@ -2,8 +2,8 @@ import { useActiveSection } from '../hooks/useActiveSection'
 
 const sections = [
   { id: 'hero', label: 'Home' },
+   { id: 'about', label: 'About' },
   { id: 'work', label: 'Work' },
-  { id: 'about', label: 'About' },
   { id: 'resume', label: 'Resume' },
   { id: 'contact', label: 'Contact' },
 ]
