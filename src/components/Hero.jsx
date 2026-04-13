@@ -1,7 +1,7 @@
 const badges = [
-  '5+ AI agents deployed',
-  '3 Series A GTM strategies',
-  'Revenue analytics in production',
+  'AI agents',
+  'GTM strategies',
+  'Growth Playbooks',
 ]
 
 export function Hero() {
@@ -56,7 +56,7 @@ export function Hero() {
           color: 'var(--text)',
           marginBottom: '20px',
         }}>
-          I build GTM playbooks and AI agents for early-stage startups.
+          I take startups from "some people know who we are" to "we know exactly how we grow."
         </h1>
 
         {/* Subheadline */}
@@ -67,7 +67,7 @@ export function Hero() {
           marginBottom: '32px',
           lineHeight: 1.5,
         }}>
-          Currently at Mesa School of Business. Previously: Untitled Creatives, D2C co-founder, GTM consulting.
+          Currently at Mesa School of Business. Previously: Untitled Creatives, Capgemini.
         </p>
 
         {/* Outcome badges */}
