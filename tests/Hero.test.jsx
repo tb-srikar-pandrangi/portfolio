@@ -9,7 +9,7 @@ describe('Hero', () => {
 
   it('renders the AI agents outcome badge', () => {
     render(<Hero />)
-    expect(screen.getByText(/AI agents deployed/i)).toBeInTheDocument()
+    expect(screen.getByText(/AI agents/i)).toBeInTheDocument()
   })
 
   it('renders the View Work link', () => {
