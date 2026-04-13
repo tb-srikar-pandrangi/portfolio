@@ -1,3 +1,5 @@
+import photo from '../assets/Image.png'
+
 const badges = [
   'AI agents',
   'GTM strategies',
@@ -26,7 +28,7 @@ export function Hero() {
           backgroundColor: 'var(--surface)',
         }}>
           <img
-            src="/Image.png"
+            src={photo}
             alt="Srikar Pandrangi"
             width={72}
             height={72}

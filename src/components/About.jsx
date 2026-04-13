@@ -1,3 +1,5 @@
+import photo from '../assets/Image.png'
+
 const stats = [
   'NIT Warangal · B.Tech Mechanical',
   'CAT 99.3 percentile',
@@ -84,7 +86,7 @@ export function About() {
             marginBottom: '24px',
           }}>
             <img
-              src="/Image.png"
+              src={photo}
               alt="Srikar Pandrangi presenting"
               loading="lazy"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
