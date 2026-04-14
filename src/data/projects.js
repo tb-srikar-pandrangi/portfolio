@@ -1,3 +1,6 @@
+import romaGlobal from '../assets/roma-global.png'
+import noto from '../assets/noto.png'
+
 export const projects = [
   {
     id: 'marketplace-digest',
@@ -31,7 +34,7 @@ export const projects = [
     outcome: 'Series A GTM playbook delivered; adopted as core positioning framework.',
     skills: ['GTM strategy', 'Brand positioning', 'Deck design'],
     link: 'https://canva.link/l3w2xwqt9xiz510',
-    image: 'https://image.thum.io/get/width/800/height/450/https://www.canva.com/design/DAHDlAVEI7k/view',
+    image: romaGlobal,
     featured: false,
     colSpan: 2,
   },
@@ -44,7 +47,7 @@ export const projects = [
     outcome: 'Delivered full brand voice guide and positioning doc.',
     skills: ['Brand strategy', 'Copywriting', 'D2C'],
     link: 'https://canva.link/hdwu0txflfsznz1',
-    image: 'https://image.thum.io/get/width/800/height/450/https://www.canva.com/design/DAHGuDutmWU/view',
+    image: noto,
     featured: false,
     colSpan: 1,
   },
