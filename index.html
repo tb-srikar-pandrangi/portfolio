@@ -1,16 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Srikar Pandrangi</title>
-    <link rel="preconnect" href="https://api.fontshare.com">
-    <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" as="style">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Srikar Pandrangi</title>
+  <meta name="description" content="Designer turned growth operator. Marketing, AI, growth.">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link
+    rel="stylesheet"
+    href="https://api.fontshare.com/v2/css?f[]=boska@400,500&f[]=general-sans@400,500&display=swap"
+  >
+</head>
+<body>
+
+  <main class="hub" id="hub">
+
+    <div class="portrait-col">
+      <img
+        src="public/Image.png"
+        alt="Srikar Pandrangi"
+        width="760"
+        height="1080"
+        class="portrait"
+        fetchpriority="high"
+      >
+    </div>
+
+    <div class="content-col">
+
+      <header class="name-row">
+        <h1 class="name">Srikar Pandrangi</h1>
+        <nav class="util-links" aria-label="Utility links">
+          <a href="/public/resume.pdf" class="util-link" download>Resume ↗</a>
+          <a href="https://linkedin.com/in/srikar-pandrangi" class="util-link" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </nav>
+      </header>
+
+      <div class="tagline">
+        <p class="tagline-display">Most people send a resume. I send the working thing.</p>
+        <p class="tagline-body">Designer turned growth operator. Marketing, AI, growth.</p>
+      </div>
+
+      <div class="bars" role="list">
+        <button
+          class="bar"
+          data-section="ai-automation"
+          role="listitem"
+          aria-expanded="false"
+          aria-controls="ai-automation"
+        >
+          <span class="bar-index" aria-hidden="true">01</span>
+          <span class="bar-label">AI &amp; Automation</span>
+          <span class="bar-desc">Working agents, dashboards, and systems I've built and deployed.</span>
+        </button>
+
+        <button
+          class="bar"
+          data-section="brand-marketing"
+          role="listitem"
+          aria-expanded="false"
+          aria-controls="brand-marketing"
+        >
+          <span class="bar-index" aria-hidden="true">02</span>
+          <span class="bar-label">Brand &amp; Marketing</span>
+          <span class="bar-desc">Campaigns, creative direction, content, and positioning.</span>
+        </button>
+
+        <button
+          class="bar"
+          data-section="growth-gtm"
+          role="listitem"
+          aria-expanded="false"
+          aria-controls="growth-gtm"
+        >
+          <span class="bar-index" aria-hidden="true">03</span>
+          <span class="bar-label">Growth &amp; GTM</span>
+          <span class="bar-desc">Go-to-market strategy, funnels, retention, and growth systems.</span>
+        </button>
+      </div>
+
+      <a href="#outside-work" class="outside-link">outside work ↗</a>
+
+    </div>
+  </main>
+
+  <!-- Sections: content in HTML source, shown/hidden via JS class toggling -->
+  <section class="section" id="ai-automation" hidden aria-label="AI and Automation">
+    <button class="section-back" aria-label="Back to home">← Back</button>
+    <h2 class="section-header">AI &amp; Automation</h2>
+    <p class="section-placeholder">Content coming soon.</p>
+  </section>
+
+  <section class="section" id="brand-marketing" hidden aria-label="Brand and Marketing">
+    <button class="section-back" aria-label="Back to home">← Back</button>
+    <h2 class="section-header">Brand &amp; Marketing</h2>
+    <p class="section-placeholder">Content coming soon.</p>
+  </section>
+
+  <section class="section" id="growth-gtm" hidden aria-label="Growth and GTM">
+    <button class="section-back" aria-label="Back to home">← Back</button>
+    <h2 class="section-header">Growth &amp; GTM</h2>
+    <p class="section-placeholder">Content coming soon.</p>
+  </section>
+
+  <section class="section" id="outside-work" hidden aria-label="Outside work">
+    <button class="section-back" aria-label="Back to home">← Back</button>
+    <h2 class="section-header">Outside Work</h2>
+    <p class="section-placeholder">Content coming soon.</p>
+  </section>
+
+  <script type="module" src="portfolio.js"></script>
+
+</body>
 </html>
