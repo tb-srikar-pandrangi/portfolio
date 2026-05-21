@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { filterProjects } from '../src/utils/filterProjects'
+import { filterProjects } from '../lib/filterProjects'
 
 const mockProjects = [
   { id: 'a', category: ['AI/Automation', 'Analytics'] },

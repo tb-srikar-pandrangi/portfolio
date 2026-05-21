@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { Hero } from '../src/components/Hero'
+import { Hero } from '../app/components/Hero'
 
 describe('Hero', () => {
   it('renders the h1 headline', () => {

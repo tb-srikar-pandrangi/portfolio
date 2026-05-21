@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { renderHook } from '@testing-library/react'
-import { useActiveSection } from '../src/hooks/useActiveSection'
+import { useActiveSection } from '../hooks/useActiveSection'
 
 describe('useActiveSection', () => {
   beforeEach(() => {

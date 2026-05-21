@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import { ProjectCard } from '../src/components/ProjectCard'
+import { ProjectCard } from '../app/components/ProjectCard'
 
 const mockProject = {
   id: 'test-project',

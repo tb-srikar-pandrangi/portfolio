@@ -1,16 +1,64 @@
-# React + Vite
+# Srikar Pandrangi's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance portfolio built with **Next.js 15** featuring Server-Side Rendering, Image Optimization, and Static Generation.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Framework**: Next.js 15
+- **React**: 19.2.4
+- **Styling**: CSS-in-JS with CSS Variables
+- **Testing**: Vitest + React Testing Library
+- **Linting**: ESLint with Flat Config
 
-## React Compiler
+## Performance Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Server-Side Rendering (SSR)**: Fully-rendered HTML on initial page load
+- **Image Optimization**: Automatic WebP/AVIF conversion with lazy loading
+- **HTTP Caching**: 1-hour cache with stale-while-revalidate strategy
+- **Static Generation**: Pre-rendered pages for instant delivery
+- **Code Splitting**: Automatic bundling optimization
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev      # Start dev server (http://localhost:3002)
+npm run build    # Build for production
+npm start        # Serve production build
+npm run lint     # Run ESLint
+npm test         # Run tests
+```
+
+## Project Structure
+
+```
+.
+├── app/                    # Next.js App Router
+│   ├── components/         # React components
+│   ├── layout.jsx          # Root layout
+│   ├── page.jsx            # Homepage
+│   └── globals.css         # Global styles
+├── hooks/                  # Custom React hooks
+├── lib/                    # Utilities
+├── public/                 # Static assets
+└── package.json
+```
+
+## Key Improvements from Vite
+
+1. **SSR**: Pages are rendered on the server, not the client
+2. **Faster Initial Load**: No render-blocking JavaScript
+3. **Better SEO**: Metadata automatically server-rendered
+4. **Image Optimization**: Built-in image component
+5. **Automatic Code Splitting**: Smaller bundles per route
+
+## Deployment
+
+This portfolio is optimized for Vercel but works on any Node.js hosting:
+
+```bash
+npm run build
+npm start
+```
+
+For Vercel: Connect your GitHub repo and it will auto-deploy on push.
