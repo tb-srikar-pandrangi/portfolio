@@ -17,24 +17,32 @@ beforeEach(async () => {
 
   document.body.innerHTML = `
     <main class="hub" id="hub" aria-hidden="false">
-      <div class="portrait-col"></div>
-      <div class="content-col">
-        <header class="name-row"></header>
-        <div class="tagline"></div>
-        <div class="bars">
-          <button class="bar" data-section="ai-automation" aria-expanded="false"></button>
-          <button class="bar" data-section="brand-marketing" aria-expanded="false"></button>
-          <button class="bar" data-section="growth-gtm" aria-expanded="false"></button>
+      <nav class="topbar"></nav>
+      <div class="bento">
+        <div class="bento-col bento-col--left">
+          <button class="card card--interactive" data-section="education"         aria-expanded="false"></button>
+          <button class="card card--interactive" data-section="experience"        aria-expanded="false"></button>
+          <button class="card card--interactive" data-section="skills"            aria-expanded="false"></button>
         </div>
-        <a class="outside-link"></a>
+        <div class="bento-col bento-col--center">
+          <button class="card card--interactive card--sm" data-section="outside-work" aria-expanded="false"></button>
+          <div class="card card--portrait"></div>
+          <div class="card card--socials"></div>
+        </div>
+        <div class="bento-col bento-col--right">
+          <button class="card card--interactive card--lg" data-section="featured-projects" aria-expanded="false"></button>
+          <button class="card card--interactive"          data-section="ai-automations"    aria-expanded="false"></button>
+        </div>
       </div>
     </main>
-    <section class="section" id="ai-automation" hidden></section>
-    <section class="section" id="brand-marketing" hidden></section>
-    <section class="section" id="growth-gtm" hidden></section>
-    <section class="section" id="outside-work" hidden>
+    <section class="section" id="education"         hidden></section>
+    <section class="section" id="experience"        hidden></section>
+    <section class="section" id="skills"            hidden></section>
+    <section class="section" id="outside-work"      hidden>
       <button class="section-back"></button>
     </section>
+    <section class="section" id="featured-projects" hidden></section>
+    <section class="section" id="ai-automations"    hidden></section>
   `
   vi.useFakeTimers()
   const mod = await import('../portfolio.js?t=' + Date.now())
@@ -70,26 +78,26 @@ describe('animateIn', () => {
 
 describe('openSection', () => {
   it('removes hidden from the target section', () => {
-    openSection('ai-automation')
-    expect(document.getElementById('ai-automation').hidden).toBe(false)
+    openSection('education')
+    expect(document.getElementById('education').hidden).toBe(false)
   })
 
   it('adds section--visible to the target section', () => {
-    openSection('brand-marketing')
-    expect(document.getElementById('brand-marketing').classList.contains('section--visible')).toBe(true)
+    openSection('experience')
+    expect(document.getElementById('experience').classList.contains('section--visible')).toBe(true)
   })
 
   it('adds hub--hidden to the hub', () => {
-    openSection('ai-automation')
+    openSection('education')
     expect(document.getElementById('hub').classList.contains('hub--hidden')).toBe(true)
   })
 
-  it('sets aria-expanded true on the matching bar only', () => {
-    openSection('ai-automation')
-    const bars = document.querySelectorAll('[data-section]')
-    expect(bars[0].getAttribute('aria-expanded')).toBe('true')
-    expect(bars[1].getAttribute('aria-expanded')).toBe('false')
-    expect(bars[2].getAttribute('aria-expanded')).toBe('false')
+  it('sets aria-expanded true on the matching card only', () => {
+    openSection('education')
+    const cards = document.querySelectorAll('[data-section]')
+    expect(cards[0].getAttribute('aria-expanded')).toBe('true')   // education
+    expect(cards[1].getAttribute('aria-expanded')).toBe('false')  // experience
+    expect(cards[2].getAttribute('aria-expanded')).toBe('false')  // skills
   })
 
   it('does nothing for an unknown id', () => {
@@ -100,13 +108,13 @@ describe('openSection', () => {
 
 describe('closeSection', () => {
   it('removes hub--hidden from the hub', () => {
-    openSection('ai-automation')
+    openSection('education')
     closeSection()
     expect(document.getElementById('hub').classList.contains('hub--hidden')).toBe(false)
   })
 
   it('removes section--visible from all sections', () => {
-    openSection('ai-automation')
+    openSection('education')
     closeSection()
     SECTION_IDS.forEach(id => {
       const s = document.getElementById(id)
@@ -114,11 +122,11 @@ describe('closeSection', () => {
     })
   })
 
-  it('resets all bars to aria-expanded false', () => {
-    openSection('ai-automation')
+  it('resets all cards to aria-expanded false', () => {
+    openSection('education')
     closeSection()
-    document.querySelectorAll('[data-section]').forEach(bar => {
-      expect(bar.getAttribute('aria-expanded')).toBe('false')
+    document.querySelectorAll('[data-section]').forEach(card => {
+      expect(card.getAttribute('aria-expanded')).toBe('false')
     })
   })
 })
@@ -126,15 +134,15 @@ describe('closeSection', () => {
 describe('handleHash', () => {
   it('opens the matching section when hash is a known id', () => {
     Object.defineProperty(window, 'location', {
-      value: { hash: '#ai-automation' },
+      value: { hash: '#education' },
       configurable: true,
     })
     handleHash()
-    expect(document.getElementById('ai-automation').classList.contains('section--visible')).toBe(true)
+    expect(document.getElementById('education').classList.contains('section--visible')).toBe(true)
   })
 
   it('calls closeSection when hash is empty', () => {
-    openSection('ai-automation')
+    openSection('education')
     Object.defineProperty(window, 'location', {
       value: { hash: '' },
       configurable: true,

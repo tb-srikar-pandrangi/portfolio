@@ -7,33 +7,36 @@
   <meta name="description" content="Marketing, AI, and growth. Building at the intersection of brand and systems.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
   <style>
 /* ─── Tokens ───────────────────────────────────────────────────── */
 :root {
-  --bg:          #0C0B09;
-  --ink:         #EDE7DC;
-  --mid:         #7A7268;
-  --faint:       rgba(237, 231, 220, 0.12);
-  --accent:      #D98323;
-  --accent-dim:  rgba(217, 131, 35, 0.08);
-  --border:      rgba(237, 231, 220, 0.09);
+  --bg:       #0A0908;
+  --card-bg:  #131211;
+  --ink:      #EEEAE2;
+  --mid:      #7A7268;
+  --accent:   #D98323;
+  --border:   rgba(238, 234, 226, 0.09);
+  --border-hover: rgba(238, 234, 226, 0.16);
 
   --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
   --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
 
-  --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1.0);
-  --ease-sharp:  cubic-bezier(0.4, 0, 0.2, 1);
+  --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out:   cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --ease-sharp: cubic-bezier(0.4, 0, 0.2, 1);
+  --radius:     12px;
+  --gap:        10px;
+  --outer:      10px;
 }
 
 /* ─── Keyframes ────────────────────────────────────────────────── */
 @keyframes revealUp {
-  from { opacity: 0; transform: translateY(28px); }
+  from { opacity: 0; transform: translateY(20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes revealPortrait {
-  from { opacity: 0; transform: scale(1.04); }
+@keyframes revealScale {
+  from { opacity: 0; transform: scale(1.03); }
   to   { opacity: 1; transform: scale(1); }
 }
 @keyframes revealFade {
@@ -43,9 +46,7 @@
 
 /* ─── Reset ────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html, body { height: 100%; overflow: hidden; }
-
 body {
   background: var(--bg);
   color: var(--ink);
@@ -53,39 +54,159 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Film grain overlay — editorial texture */
+/* Film grain — editorial texture */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   background-size: 180px 180px;
-  opacity: 0.03;
+  opacity: 0.025;
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: screen;
 }
 
-/* ─── Hub ──────────────────────────────────────────────────────── */
+/* ─── Hub (outer container) ────────────────────────────────────── */
 .hub {
-  display: grid;
-  grid-template-columns: 64fr 36fr;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  padding: var(--outer);
+  gap: var(--gap);
 }
 
-/* ─── Portrait column ──────────────────────────────────────────── */
-.portrait-col {
-  position: relative;
+/* ─── Topbar ───────────────────────────────────────────────────── */
+.topbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.375rem;
+  height: 54px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  opacity: 0; /* animated in */
+}
+
+.topbar-name {
+  font-family: var(--font-display);
+  font-size: clamp(0.9rem, 1.3vw, 1.1rem);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.topbar-cta {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(238, 234, 226, 0.22);
+  border-radius: 6px;
+  padding: 0.45rem 0.875rem;
+  transition: background 150ms var(--ease-sharp), border-color 150ms var(--ease-sharp);
+}
+.topbar-cta:hover {
+  background: rgba(238, 234, 226, 0.06);
+  border-color: rgba(238, 234, 226, 0.38);
+}
+.topbar-cta:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ─── Bento grid ───────────────────────────────────────────────── */
+.bento {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--gap);
+  min-height: 0;
+}
+
+/* ─── Bento columns ────────────────────────────────────────────── */
+.bento-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  min-height: 0;
+}
+
+/* Left: 3 equal cards */
+.bento-col--left .card { flex: 1; }
+
+/* Center: small / portrait / small */
+.bento-col--center .card--sm      { flex: 0 0 70px; }
+.bento-col--center .card--portrait { flex: 1; }
+.bento-col--center .card--socials  { flex: 0 0 70px; }
+
+/* Right: larger top, smaller bottom */
+.bento-col--right .card--lg       { flex: 3; }
+.bento-col--right .card:not(.card--lg) { flex: 2; }
+
+/* ─── Card base ────────────────────────────────────────────────── */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  min-height: 0;
   overflow: hidden;
-  background: var(--bg); /* matches page — no seam */
-  grid-column: 2;
-  /* filter is on .portrait (not here) so ::after overlay renders at true var(--bg) */
-  opacity: 0; /* starts invisible for load animation */
+  opacity: 0; /* animated in */
 }
 
-/* Content column always on the left */
-.content-col {
-  grid-column: 1;
+/* Interactive card (button) */
+.card--interactive {
+  cursor: pointer;
+  text-align: center;
+  font: inherit;
+  transition: background 200ms var(--ease-sharp), border-color 200ms var(--ease-sharp);
+}
+.card--interactive:hover {
+  background: #1B1917;
+  border-color: var(--border-hover);
+}
+.card--interactive:active { background: #201D1A; }
+.card--interactive[aria-expanded="true"] {
+  border-color: rgba(217, 131, 35, 0.4);
+  background: rgba(217, 131, 35, 0.05);
+}
+.card--interactive:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* Card label */
+.card-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+/* Smaller label for small cards */
+.card--sm .card-label {
+  font-size: clamp(0.875rem, 1.1vw, 1rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
+
+/* ─── Portrait card ────────────────────────────────────────────── */
+.card--portrait {
+  padding: 0;
+  cursor: default;
+  /* overflow: hidden inherited — clips image to border-radius */
 }
 
 .portrait {
@@ -94,29 +215,86 @@ body::after {
   object-fit: cover;
   object-position: center 12%;
   display: block;
-  /* Filter on the img element only — keeps ::after overlay colour-accurate */
-  filter: grayscale(90%) contrast(1.08) brightness(0.72);
 }
 
-/* Dual-axis fade: portrait bleeds into dark bg on left edge + bottom */
-.portrait-col::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to left,   transparent 45%, var(--bg) 100%),
-    linear-gradient(to bottom, transparent 50%, rgba(12, 11, 9, 0.9) 100%);
-  pointer-events: none;
+/* ─── Socials card ─────────────────────────────────────────────── */
+.card--socials {
+  flex-direction: row;
+  padding: 8px;
+  gap: 8px;
+  cursor: default;
 }
 
-/* ─── Content column ───────────────────────────────────────────── */
-.content-col {
+.social-btn {
+  flex: 1;
+  height: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 2.5rem;
-  padding: 3.5rem 5rem 3.5rem 6.5rem;
-  overflow-y: auto;
+  background: rgba(238, 234, 226, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background 150ms var(--ease-sharp), border-color 150ms var(--ease-sharp), color 150ms;
+}
+.social-btn:hover {
+  background: rgba(238, 234, 226, 0.07);
+  border-color: var(--border-hover);
+  color: #fff;
+}
+.social-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+/* ─── Load animations (triggered by .loaded on #hub) ──────────── */
+/* Topbar */
+.hub.loaded .topbar {
+  animation: revealUp 600ms var(--ease) 0ms forwards;
+}
+/* Left column */
+.hub.loaded .bento-col--left .card:nth-child(1) {
+  animation: revealUp 600ms var(--ease) 80ms forwards;
+}
+.hub.loaded .bento-col--left .card:nth-child(2) {
+  animation: revealUp 600ms var(--ease) 145ms forwards;
+}
+.hub.loaded .bento-col--left .card:nth-child(3) {
+  animation: revealUp 600ms var(--ease) 210ms forwards;
+}
+/* Center column */
+.hub.loaded .bento-col--center .card:nth-child(1) {
+  animation: revealUp 600ms var(--ease) 55ms forwards;
+}
+.hub.loaded .bento-col--center .card:nth-child(2) {
+  animation: revealScale 900ms var(--ease) 15ms forwards;
+}
+.hub.loaded .bento-col--center .card:nth-child(3) {
+  animation: revealUp 600ms var(--ease) 115ms forwards;
+}
+/* Right column */
+.hub.loaded .bento-col--right .card:nth-child(1) {
+  animation: revealUp 600ms var(--ease) 100ms forwards;
+}
+.hub.loaded .bento-col--right .card:nth-child(2) {
+  animation: revealUp 600ms var(--ease) 185ms forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub.loaded .topbar,
+  .hub.loaded .card {
+    animation: revealFade 300ms linear forwards !important;
+  }
+  .hub--hidden, .section { transition: opacity 200ms linear; transform: none !important; }
+}
+
+/* ─── Hub hidden state (section open) ─────────────────────────── */
+.hub--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms var(--ease);
 }
 
 /* ─── Sections (full-screen overlay) ──────────────────────────── */
@@ -124,260 +302,20 @@ body::after {
   position: fixed;
   inset: 0;
   background: var(--bg);
-  padding: 5rem 6.5rem;
+  padding: 4rem 6rem;
   overflow-y: auto;
   opacity: 0;
   transform: translateY(20px);
-  transition:
-    opacity   500ms var(--ease),
-    transform 500ms var(--ease);
+  transition: opacity 500ms var(--ease), transform 500ms var(--ease);
   pointer-events: none;
 }
 .section[hidden]   { display: none !important; }
 .section--visible  { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
-.hub--hidden {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 400ms var(--ease);
-}
-
-/* ─── Load animations — triggered by .loaded on hub ───────────── */
-.portrait-col,
-.name-row,
-.tagline,
-.bars .bar,
-.outside-link { opacity: 0; }
-
-.hub.loaded .portrait-col {
-  animation: revealPortrait 1.1s var(--ease) forwards;
-}
-.hub.loaded .name-row {
-  animation: revealUp 700ms var(--ease) 100ms forwards;
-}
-.hub.loaded .tagline {
-  animation: revealUp 700ms var(--ease) 250ms forwards;
-}
-.hub.loaded .bars .bar:nth-child(1) {
-  animation: revealUp 600ms var(--ease) 400ms forwards;
-}
-.hub.loaded .bars .bar:nth-child(2) {
-  animation: revealUp 600ms var(--ease) 490ms forwards;
-}
-.hub.loaded .bars .bar:nth-child(3) {
-  animation: revealUp 600ms var(--ease) 580ms forwards;
-}
-.hub.loaded .outside-link {
-  animation: revealUp 600ms var(--ease) 680ms forwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hub.loaded .portrait-col,
-  .hub.loaded .name-row,
-  .hub.loaded .tagline,
-  .hub.loaded .bars .bar,
-  .hub.loaded .outside-link {
-    animation: revealFade 300ms linear forwards;
-  }
-  .hub--hidden, .section {
-    transition: opacity 200ms linear;
-    transform: none !important;
-  }
-}
-
-/* ─── Name row ─────────────────────────────────────────────────── */
-.name-row {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.name {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 4.8vw, 4.8rem);
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
-}
-
-.util-links {
-  display: flex;
-  gap: 1.75rem;
-  list-style: none;
-}
-
-.util-link {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  color: var(--mid);
-  text-decoration: none;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: color 150ms var(--ease-sharp);
-}
-.util-link:hover { color: var(--ink); }
-.util-link:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-/* ─── Tagline ──────────────────────────────────────────────────── */
-.tagline {
-  display: flex;
-  flex-direction: column;
-  gap: 0.875rem;
-  max-width: 40ch;
-}
-
-.tagline-display {
-  font-family: var(--font-display);
-  font-size: clamp(1.375rem, 2vw, 1.875rem);
-  font-weight: 300;
-  color: var(--ink);
-  line-height: 1.25;
-  letter-spacing: -0.02em;
-}
-
-.tagline-body {
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  font-weight: 300;
-  color: var(--mid);
-  line-height: 1.6;
-}
-
-/* ─── Bars ─────────────────────────────────────────────────────── */
-.bars {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--border);
-}
-
-.bar {
-  position: relative;
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  grid-template-rows: auto auto;
-  column-gap: 0.75rem;
-  align-items: start;
-
-  padding: 1.375rem 3rem 1.375rem 0;
-  border: none;
-  border-bottom: 1px solid var(--border);
-  background: transparent;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-  overflow: hidden;
-
-  transition: background 200ms var(--ease-sharp);
-}
-
-/* Left-edge accent bar — grows downward on hover */
-.bar::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--accent);
-  transform: scaleY(0);
-  transform-origin: top center;
-  transition: transform 250ms var(--ease-out);
-}
-
-/* Arrow slides in from right on hover */
-.bar::after {
-  content: '→';
-  position: absolute;
-  right: 0.75rem;
-  top: 50%;
-  transform: translateY(-50%) translateX(10px);
-  opacity: 0;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  color: var(--accent);
-  transition:
-    opacity   150ms var(--ease-sharp),
-    transform 200ms var(--ease-sharp);
-}
-
-.bar:hover                { background: var(--accent-dim); }
-.bar:hover::before        { transform: scaleY(1); }
-.bar:hover::after         { opacity: 1; transform: translateY(-50%) translateX(0); }
-.bar:active               { background: rgba(217, 131, 35, 0.14); }
-.bar[aria-expanded="true"]{ background: rgba(217, 131, 35, 0.06); border-left: 2px solid var(--accent); }
-
-.bar:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
-  border-radius: 2px;
-}
-
-.bar-index {
-  font-family: var(--font-body);
-  font-size: 0.5625rem;
-  font-weight: 500;
-  color: var(--accent);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  grid-row: 1;
-  grid-column: 1;
-  padding-top: 0.5rem;
-  align-self: start;
-  opacity: 0.75;
-  transition: opacity 150ms var(--ease-sharp);
-}
-
-.bar:hover .bar-index { opacity: 1; }
-
-.bar-label {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.1vw, 2rem);
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
-  grid-row: 1;
-  grid-column: 2;
-}
-
-.bar-desc {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  font-weight: 300;
-  color: var(--mid);
-  line-height: 1.55;
-  grid-row: 2;
-  grid-column: 2;
-  margin-top: 0.3rem;
-}
-
-/* ─── Outside link ─────────────────────────────────────────────── */
-.outside-link {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  color: var(--mid);
-  text-decoration: none;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  align-self: flex-start;
-  transition: color 150ms var(--ease-sharp);
-}
-.outside-link:hover { color: var(--ink); }
-.outside-link:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-  border-radius: 2px;
-}
-
-/* ─── Section layout ───────────────────────────────────────────── */
 .section-back {
   font-family: var(--font-body);
   font-size: 0.6875rem;
+  font-weight: 400;
   color: var(--mid);
   background: none;
   border: none;
@@ -398,10 +336,10 @@ body::after {
 
 .section-header {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 4.8rem);
-  font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
   color: var(--ink);
-  line-height: 0.92;
+  line-height: 0.95;
   letter-spacing: -0.04em;
   margin-bottom: 3rem;
 }
@@ -418,47 +356,45 @@ body::after {
   html, body { overflow: auto; height: auto; }
 
   .hub {
-    grid-template-columns: 1fr;
-    grid-template-rows: 58vw auto;
     height: auto;
     min-height: 100vh;
+    overflow: visible;
+    gap: 8px;
+    padding: 8px;
   }
 
-  .portrait-col {
-    height: 58vw;
-    filter: grayscale(90%) contrast(1.06) brightness(0.68);
-  }
-  .portrait-col::after {
-    background: linear-gradient(
-      to bottom,
-      transparent 25%,
-      rgba(12, 11, 9, 0.55) 60%,
-      #0C0B09 100%
-    );
-  }
-  .portrait { object-position: center 15%; }
-
-  .content-col {
-    padding: 2.75rem 2rem;
-    gap: 2.5rem;
-    justify-content: flex-start;
+  .bento {
+    grid-template-columns: 1fr;
+    height: auto;
+    flex: none;
   }
 
-  .name { font-size: clamp(2.5rem, 9vw, 3.5rem); }
-  .tagline-display { font-size: 1.375rem; }
-  .bar-label { font-size: 1.5rem; }
-  .bar { padding-right: 1.5rem; }
-  .bar:hover { background: transparent; }
-  .bar::before, .bar::after { display: none; }
+  .bento-col {
+    flex-direction: column;
+    height: auto;
+  }
 
-  .section { position: static; padding: 2.75rem 2rem; }
+  /* Left col cards: fixed small height on mobile */
+  .bento-col--left .card { flex: none; height: 100px; }
+
+  /* Center: portrait tall, others natural */
+  .bento-col--center .card--sm    { flex: none; height: 60px; }
+  .bento-col--center .card--portrait { flex: none; height: 70vw; }
+  .bento-col--center .card--socials  { flex: none; height: 64px; }
+
+  /* Right col */
+  .bento-col--right .card--lg       { flex: none; height: 120px; }
+  .bento-col--right .card:not(.card--lg) { flex: none; height: 100px; }
+
+  .section { position: static; padding: 2.5rem 1.5rem; }
   .section--visible { position: fixed; inset: 0; overflow-y: auto; }
 }
 
 /* ─── Tablet (768–1023px) ──────────────────────────────────────── */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .hub { grid-template-columns: 62fr 38fr; }
-  .content-col { padding: 3rem 3rem 3rem 3.5rem; gap: 2.25rem; }
+  .bento-col--center .card--sm     { flex: 0 0 62px; }
+  .bento-col--center .card--socials { flex: 0 0 62px; }
+  .card-label { font-size: clamp(0.9rem, 1.4vw, 1.25rem); }
 }
   </style>
 </head>
@@ -466,97 +402,144 @@ body::after {
 
   <main class="hub" id="hub">
 
-    <div class="portrait-col">
-      <img
-        src="public/portrait.webp"
-        alt="Srikar Pandrangi"
-        width="1200"
-        height="1092"
-        class="portrait"
-        fetchpriority="high"
-      >
-    </div>
+    <!-- ── Top navigation bar ──────────────────────────────────── -->
+    <nav class="topbar" aria-label="Site navigation">
+      <span class="topbar-name">Srikar Pandrangi</span>
+      <a href="/public/resume.pdf" class="topbar-cta" download aria-label="Download resume PDF">
+        Download My Resume
+      </a>
+    </nav>
 
-    <div class="content-col">
+    <!-- ── Bento grid ──────────────────────────────────────────── -->
+    <div class="bento">
 
-      <header class="name-row">
-        <h1 class="name">Srikar Pandrangi</h1>
-        <nav class="util-links" aria-label="Utility links">
-          <a href="/public/resume.pdf" class="util-link" download>Resume ↗</a>
-          <a href="https://www.linkedin.com/in/srikarpandrangi" class="util-link" target="_blank" rel="noopener">LinkedIn ↗</a>
-        </nav>
-      </header>
-
-      <div class="tagline">
-        <p class="tagline-display">Most people send a resume. I send the working thing.</p>
-        <p class="tagline-body">Designer turned growth operator. Marketing, AI, growth.</p>
-      </div>
-
-      <div class="bars" role="list">
-        <button
-          class="bar"
-          data-section="ai-automation"
-          role="listitem"
+      <!-- Left column -->
+      <div class="bento-col bento-col--left">
+        <button class="card card--interactive"
+          data-section="education"
           aria-expanded="false"
-          aria-controls="ai-automation"
-        >
-          <span class="bar-index" aria-hidden="true">01</span>
-          <span class="bar-label">AI &amp; Automation</span>
-          <span class="bar-desc">Working agents, dashboards, and systems I've built and deployed.</span>
+          aria-controls="education">
+          <span class="card-label">Education</span>
         </button>
-
-        <button
-          class="bar"
-          data-section="brand-marketing"
-          role="listitem"
+        <button class="card card--interactive"
+          data-section="experience"
           aria-expanded="false"
-          aria-controls="brand-marketing"
-        >
-          <span class="bar-index" aria-hidden="true">02</span>
-          <span class="bar-label">Brand &amp; Marketing</span>
-          <span class="bar-desc">Campaigns, creative direction, content, and positioning.</span>
+          aria-controls="experience">
+          <span class="card-label">Experience</span>
         </button>
-
-        <button
-          class="bar"
-          data-section="growth-gtm"
-          role="listitem"
+        <button class="card card--interactive"
+          data-section="skills"
           aria-expanded="false"
-          aria-controls="growth-gtm"
-        >
-          <span class="bar-index" aria-hidden="true">03</span>
-          <span class="bar-label">Growth &amp; GTM</span>
-          <span class="bar-desc">Go-to-market strategy, funnels, retention, and growth systems.</span>
+          aria-controls="skills">
+          <span class="card-label">Skills</span>
         </button>
       </div>
 
-      <a href="#outside-work" class="outside-link">outside work ↗</a>
+      <!-- Center column -->
+      <div class="bento-col bento-col--center">
+        <button class="card card--interactive card--sm"
+          data-section="outside-work"
+          aria-expanded="false"
+          aria-controls="outside-work">
+          <span class="card-label">Me Beyond Work</span>
+        </button>
 
-    </div>
+        <div class="card card--portrait">
+          <img
+            src="public/portrait.webp"
+            alt="Srikar Pandrangi"
+            width="1200"
+            height="1092"
+            class="portrait"
+            fetchpriority="high"
+          >
+        </div>
+
+        <div class="card card--socials" role="group" aria-label="Social links">
+          <a href="https://www.linkedin.com/in/srikarpandrangi"
+            class="social-btn"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn profile">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+              <rect x="2" y="9" width="4" height="12"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <a href="mailto:"
+            class="social-btn"
+            aria-label="Send email">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+          </a>
+          <a href="tel:"
+            class="social-btn"
+            aria-label="Call phone">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="bento-col bento-col--right">
+        <button class="card card--interactive card--lg"
+          data-section="featured-projects"
+          aria-expanded="false"
+          aria-controls="featured-projects">
+          <span class="card-label">Featured Projects</span>
+        </button>
+        <button class="card card--interactive"
+          data-section="ai-automations"
+          aria-expanded="false"
+          aria-controls="ai-automations">
+          <span class="card-label">AI Automations</span>
+        </button>
+      </div>
+
+    </div><!-- /.bento -->
+
   </main>
 
-  <!-- Sections: content in HTML source, shown/hidden via JS class toggling -->
-  <section class="section" id="ai-automation" hidden aria-label="AI and Automation">
+  <!-- ── Sections ─────────────────────────────────────────────── -->
+
+  <section class="section" id="education" hidden aria-label="Education">
     <button class="section-back" aria-label="Back to home">← Back</button>
-    <h2 class="section-header">AI &amp; Automation</h2>
+    <h2 class="section-header">Education</h2>
     <p class="section-placeholder">Content coming soon.</p>
   </section>
 
-  <section class="section" id="brand-marketing" hidden aria-label="Brand and Marketing">
+  <section class="section" id="experience" hidden aria-label="Experience">
     <button class="section-back" aria-label="Back to home">← Back</button>
-    <h2 class="section-header">Brand &amp; Marketing</h2>
+    <h2 class="section-header">Experience</h2>
     <p class="section-placeholder">Content coming soon.</p>
   </section>
 
-  <section class="section" id="growth-gtm" hidden aria-label="Growth and GTM">
+  <section class="section" id="skills" hidden aria-label="Skills">
     <button class="section-back" aria-label="Back to home">← Back</button>
-    <h2 class="section-header">Growth &amp; GTM</h2>
+    <h2 class="section-header">Skills</h2>
     <p class="section-placeholder">Content coming soon.</p>
   </section>
 
-  <section class="section" id="outside-work" hidden aria-label="Outside work">
+  <section class="section" id="outside-work" hidden aria-label="Me Beyond Work">
     <button class="section-back" aria-label="Back to home">← Back</button>
-    <h2 class="section-header">Outside Work</h2>
+    <h2 class="section-header">Me Beyond Work</h2>
+    <p class="section-placeholder">Content coming soon.</p>
+  </section>
+
+  <section class="section" id="featured-projects" hidden aria-label="Featured Projects">
+    <button class="section-back" aria-label="Back to home">← Back</button>
+    <h2 class="section-header">Featured Projects</h2>
+    <p class="section-placeholder">Content coming soon.</p>
+  </section>
+
+  <section class="section" id="ai-automations" hidden aria-label="AI Automations">
+    <button class="section-back" aria-label="Back to home">← Back</button>
+    <h2 class="section-header">AI Automations</h2>
     <p class="section-placeholder">Content coming soon.</p>
   </section>
 

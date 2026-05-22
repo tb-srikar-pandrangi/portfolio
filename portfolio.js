@@ -1,6 +1,6 @@
 // portfolio.js — ES module, auto-inits in browser only
 
-export const SECTION_IDS = ['ai-automation', 'brand-marketing', 'growth-gtm', 'outside-work']
+export const SECTION_IDS = ['education', 'experience', 'skills', 'outside-work', 'featured-projects', 'ai-automations']
 
 export function animateIn() {
   const hub = document.getElementById('hub')
