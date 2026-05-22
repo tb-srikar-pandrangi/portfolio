@@ -60,11 +60,41 @@ export function handleHash() {
   }
 }
 
+let _toastTimer = null
+function showToast(message) {
+  const el = document.getElementById('toast')
+  if (!el) return
+  el.textContent = message
+  el.classList.add('toast--visible')
+  clearTimeout(_toastTimer)
+  _toastTimer = setTimeout(() => el.classList.remove('toast--visible'), 2500)
+}
+
 export function initListeners() {
-  // Bar clicks → update hash
+  // Card clicks → update hash
   document.querySelectorAll('[data-section]').forEach(bar => {
     bar.addEventListener('click', () => {
       window.location.hash = bar.dataset.section
+    })
+  })
+
+  // Email copy to clipboard
+  document.querySelectorAll('[data-copy-email]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const email = btn.dataset.copyEmail
+      try {
+        await navigator.clipboard.writeText(email)
+      } catch {
+        // Fallback for browsers without clipboard API
+        const ta = document.createElement('textarea')
+        ta.value = email
+        ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none'
+        document.body.appendChild(ta)
+        ta.select()
+        document.execCommand('copy')
+        ta.remove()
+      }
+      showToast('Email copied to clipboard')
     })
   })
 
