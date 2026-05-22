@@ -51,31 +51,20 @@ afterEach(() => {
 })
 
 describe('animateIn', () => {
-  it('adds anim-ready to all animated elements', () => {
+  it('does not add loaded to hub before the timer fires', () => {
     animateIn()
-    const ready = document.querySelectorAll('.anim-ready')
-    expect(ready.length).toBeGreaterThanOrEqual(6)
+    expect(document.getElementById('hub').classList.contains('loaded')).toBe(false)
   })
 
-  it('adds anim-in after the stagger delay fires', () => {
+  it('adds loaded to hub after the timer fires', () => {
     animateIn()
-    expect(document.querySelectorAll('.anim-in').length).toBe(0)
     vi.runAllTimers()
-    const done = document.querySelectorAll('.anim-in')
-    expect(done.length).toBeGreaterThanOrEqual(6)
+    expect(document.getElementById('hub').classList.contains('loaded')).toBe(true)
   })
 
-  it('bars get staggered delays (each bar after the previous)', () => {
-    const calls = []
-    vi.spyOn(globalThis, 'setTimeout').mockImplementation((fn, delay) => {
-      calls.push(delay)
-      fn()
-      return 0
-    })
-    animateIn()
-    const barDelays = calls.slice(3, 6)
-    expect(barDelays[0]).toBeLessThan(barDelays[1])
-    expect(barDelays[1]).toBeLessThan(barDelays[2])
+  it('does nothing when hub element is absent', () => {
+    document.getElementById('hub').remove()
+    expect(() => { animateIn(); vi.runAllTimers() }).not.toThrow()
   })
 })
 

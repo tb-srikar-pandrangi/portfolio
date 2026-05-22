@@ -2,24 +2,12 @@
 
 export const SECTION_IDS = ['ai-automation', 'brand-marketing', 'growth-gtm', 'outside-work']
 
-const STAGGER = [0, 100, 200, 300, 360, 420, 480]
-
 export function animateIn() {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-  const elements = [
-    document.querySelector('.portrait-col'),
-    document.querySelector('.name-row'),
-    document.querySelector('.tagline'),
-    ...document.querySelectorAll('.bar'),
-    document.querySelector('.outside-link'),
-  ].filter(Boolean)
-
-  elements.forEach((el, i) => {
-    el.classList.add('anim-ready')
-    const delay = prefersReduced ? 0 : (STAGGER[i] ?? i * 60)
-    setTimeout(() => el.classList.add('anim-in'), delay)
-  })
+  const hub = document.getElementById('hub')
+  if (!hub) return
+  // Adding 'loaded' triggers all CSS keyframe animations (revealUp, revealScale, revealFade)
+  // Deferred one tick so initial opacity:0 renders before the animation class fires
+  setTimeout(() => hub.classList.add('loaded'), 0)
 }
 
 export function openSection(id) {
