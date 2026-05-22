@@ -4,46 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Srikar Pandrangi</title>
-  <meta name="description" content="Designer turned growth operator. Marketing, AI, growth.">
-  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-  <link
-    rel="stylesheet"
-    href="https://api.fontshare.com/v2/css?f[]=boska@400,500&f[]=general-sans@400,500&display=swap"
-  >
+  <meta name="description" content="Marketing, AI, and growth. Building at the intersection of brand and systems.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <style>
-/* ─── Tokens ─────────────────────────────────────────────────── */
+/* ─── Tokens ───────────────────────────────────────────────────── */
 :root {
-  --bg:        #F4F0E8;
-  --ink:       #1C1A17;
-  --mid:       #8A8278;
-  --accent:    #B8502D;
-  --border:    rgba(28, 26, 23, 0.1);
+  --bg:          #0C0B09;
+  --ink:         #EDE7DC;
+  --mid:         #7A7268;
+  --faint:       rgba(237, 231, 220, 0.12);
+  --accent:      #D98323;
+  --accent-dim:  rgba(217, 131, 35, 0.08);
+  --border:      rgba(237, 231, 220, 0.09);
 
-  --font-display: 'Boska', Georgia, serif;
-  --font-body:    'General Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
 
-  --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-sharp: cubic-bezier(0.4, 0, 0.2, 1);
-  --dur-fast:   150ms;
-  --dur-mid:    300ms;
-  --dur-slow:   500ms;
+  --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1.0);
+  --ease-sharp:  cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ─── Keyframes ──────────────────────────────────────────────── */
+/* ─── Keyframes ────────────────────────────────────────────────── */
 @keyframes revealUp {
-  from { opacity: 0; transform: translateY(32px); }
-  to   { opacity: 1; transform: translateY(0);    }
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes revealScale {
+@keyframes revealPortrait {
   from { opacity: 0; transform: scale(1.04); }
-  to   { opacity: 1; transform: scale(1);    }
+  to   { opacity: 1; transform: scale(1); }
 }
 @keyframes revealFade {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-/* ─── Reset ──────────────────────────────────────────────────── */
+/* ─── Reset ────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body { height: 100%; overflow: hidden; }
@@ -55,19 +53,33 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Hub ────────────────────────────────────────────────────── */
+/* Film grain overlay — editorial texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+}
+
+/* ─── Hub ──────────────────────────────────────────────────────── */
 .hub {
   display: grid;
-  grid-template-columns: 34fr 66fr;
+  grid-template-columns: 36fr 64fr;
   height: 100vh;
 }
 
-/* ─── Portrait column ────────────────────────────────────────── */
+/* ─── Portrait column ──────────────────────────────────────────── */
 .portrait-col {
   position: relative;
   overflow: hidden;
-  background: #D4CEBF;
-  opacity: 0; /* starts invisible — animation reveals it */
+  background: #151310;
+  filter: grayscale(90%) contrast(1.08) brightness(0.72);
+  opacity: 0; /* starts invisible for load animation */
 }
 
 .portrait {
@@ -78,55 +90,51 @@ body {
   display: block;
 }
 
-/* Gradient fade: portrait bleeds into background at bottom */
+/* Dual-axis fade: portrait bleeds into dark bg on right + bottom */
 .portrait-col::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 40%,
-    rgba(244, 240, 232, 0.4) 70%,
-    var(--bg) 100%
-  );
+  background:
+    linear-gradient(to right,  transparent 50%, #0C0B09 100%),
+    linear-gradient(to bottom, transparent 50%, rgba(12, 11, 9, 0.9) 100%);
   pointer-events: none;
 }
 
-/* ─── Content column ─────────────────────────────────────────── */
+/* ─── Content column ───────────────────────────────────────────── */
 .content-col {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 3.25rem;
-  padding: 5rem 6rem 5rem 5rem;
+  gap: 3.5rem;
+  padding: 5rem 6.5rem 5rem 5rem;
   overflow-y: auto;
 }
 
-/* ─── Sections ───────────────────────────────────────────────── */
+/* ─── Sections (full-screen overlay) ──────────────────────────── */
 .section {
   position: fixed;
   inset: 0;
   background: var(--bg);
-  padding: 5rem 6rem;
+  padding: 5rem 6.5rem;
   overflow-y: auto;
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(20px);
   transition:
-    opacity   var(--dur-slow) var(--ease),
-    transform var(--dur-slow) var(--ease);
+    opacity   500ms var(--ease),
+    transform 500ms var(--ease);
   pointer-events: none;
 }
-.section[hidden]    { display: none !important; }
-.section--visible   { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.section[hidden]   { display: none !important; }
+.section--visible  { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
 .hub--hidden {
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--dur-slow) var(--ease);
+  transition: opacity 400ms var(--ease);
 }
 
-/* ─── Load animations — triggered by .loaded on hub ─────────── */
-/* All animated children start invisible */
+/* ─── Load animations — triggered by .loaded on hub ───────────── */
 .portrait-col,
 .name-row,
 .tagline,
@@ -134,25 +142,25 @@ body {
 .outside-link { opacity: 0; }
 
 .hub.loaded .portrait-col {
-  animation: revealScale 1s var(--ease) forwards;
+  animation: revealPortrait 1.1s var(--ease) forwards;
 }
 .hub.loaded .name-row {
-  animation: revealUp 700ms var(--ease) 80ms forwards;
+  animation: revealUp 700ms var(--ease) 100ms forwards;
 }
 .hub.loaded .tagline {
-  animation: revealUp 700ms var(--ease) 220ms forwards;
+  animation: revealUp 700ms var(--ease) 250ms forwards;
 }
 .hub.loaded .bars .bar:nth-child(1) {
-  animation: revealUp 600ms var(--ease) 360ms forwards;
+  animation: revealUp 600ms var(--ease) 400ms forwards;
 }
 .hub.loaded .bars .bar:nth-child(2) {
-  animation: revealUp 600ms var(--ease) 450ms forwards;
+  animation: revealUp 600ms var(--ease) 490ms forwards;
 }
 .hub.loaded .bars .bar:nth-child(3) {
-  animation: revealUp 600ms var(--ease) 540ms forwards;
+  animation: revealUp 600ms var(--ease) 580ms forwards;
 }
 .hub.loaded .outside-link {
-  animation: revealUp 600ms var(--ease) 630ms forwards;
+  animation: revealUp 600ms var(--ease) 680ms forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -161,33 +169,33 @@ body {
   .hub.loaded .tagline,
   .hub.loaded .bars .bar,
   .hub.loaded .outside-link {
-    animation: revealFade 400ms var(--ease) forwards;
+    animation: revealFade 300ms linear forwards;
   }
   .hub--hidden, .section {
-    transition: opacity var(--dur-mid) var(--ease);
+    transition: opacity 200ms linear;
     transform: none !important;
   }
 }
 
-/* ─── Name row ───────────────────────────────────────────────── */
+/* ─── Name row ─────────────────────────────────────────────────── */
 .name-row {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .name {
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 4.5vw, 4.5rem);
-  font-weight: 400;
+  font-size: clamp(3rem, 4.8vw, 4.8rem);
+  font-weight: 500;
   color: var(--ink);
-  line-height: 0.95;
-  letter-spacing: -0.035em;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
 }
 
 .util-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.75rem;
   list-style: none;
 }
 
@@ -196,9 +204,9 @@ body {
   font-size: 0.6875rem;
   color: var(--mid);
   text-decoration: none;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: color var(--dur-fast) var(--ease-sharp);
+  transition: color 150ms var(--ease-sharp);
 }
 .util-link:hover { color: var(--ink); }
 .util-link:focus-visible {
@@ -207,30 +215,32 @@ body {
   border-radius: 2px;
 }
 
-/* ─── Tagline ─────────────────────────────────────────────────── */
+/* ─── Tagline ──────────────────────────────────────────────────── */
 .tagline {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  max-width: 44ch;
+  gap: 0.875rem;
+  max-width: 40ch;
 }
 
 .tagline-display {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.1vw, 2rem);
-  font-weight: 400;
+  font-size: clamp(1.375rem, 2vw, 1.875rem);
+  font-weight: 300;
   color: var(--ink);
-  line-height: 1.2;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
 }
 
 .tagline-body {
   font-family: var(--font-body);
   font-size: 0.9375rem;
+  font-weight: 300;
   color: var(--mid);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
-/* ─── Bars ────────────────────────────────────────────────────── */
+/* ─── Bars ─────────────────────────────────────────────────────── */
 .bars {
   display: flex;
   flex-direction: column;
@@ -245,7 +255,7 @@ body {
   column-gap: 0.75rem;
   align-items: start;
 
-  padding: 1.625rem 0;
+  padding: 1.75rem 3rem 1.75rem 0;
   border: none;
   border-bottom: 1px solid var(--border);
   background: transparent;
@@ -254,27 +264,28 @@ body {
   width: 100%;
   overflow: hidden;
 
-  transition: transform var(--dur-fast) var(--ease-sharp);
+  transition: background 200ms var(--ease-sharp);
 }
 
-/* Sweep fill on hover */
+/* Left-edge accent bar — grows downward on hover */
 .bar::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg,
-    rgba(184, 80, 45, 0.055) 0%,
-    transparent 75%
-  );
-  opacity: 0;
-  transition: opacity var(--dur-fast) var(--ease-sharp);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform 250ms var(--ease-out);
 }
 
-/* Arrow that slides in from right on hover */
+/* Arrow slides in from right on hover */
 .bar::after {
   content: '→';
   position: absolute;
-  right: 0.25rem;
+  right: 0.75rem;
   top: 50%;
   transform: translateY(-50%) translateX(10px);
   opacity: 0;
@@ -282,15 +293,15 @@ body {
   font-size: 0.875rem;
   color: var(--accent);
   transition:
-    opacity   var(--dur-fast) var(--ease-sharp),
-    transform var(--dur-fast) var(--ease-sharp);
+    opacity   150ms var(--ease-sharp),
+    transform 200ms var(--ease-sharp);
 }
 
-.bar:hover::before  { opacity: 1; }
-.bar:hover::after   { opacity: 1; transform: translateY(-50%) translateX(0); }
-.bar:hover          { transform: translateX(5px); }
-.bar:active         { transform: translateX(2px); }
-.bar[aria-expanded="true"] { background: rgba(184, 80, 45, 0.04); }
+.bar:hover                { background: var(--accent-dim); }
+.bar:hover::before        { transform: scaleY(1); }
+.bar:hover::after         { opacity: 1; transform: translateY(-50%) translateX(0); }
+.bar:active               { background: rgba(217, 131, 35, 0.14); }
+.bar[aria-expanded="true"]{ background: rgba(217, 131, 35, 0.06); border-left: 2px solid var(--accent); }
 
 .bar:focus-visible {
   outline: 2px solid var(--accent);
@@ -301,22 +312,27 @@ body {
 .bar-index {
   font-family: var(--font-body);
   font-size: 0.5625rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--accent);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   grid-row: 1;
   grid-column: 1;
-  padding-top: 0.45rem;
+  padding-top: 0.5rem;
   align-self: start;
+  opacity: 0.75;
+  transition: opacity 150ms var(--ease-sharp);
 }
+
+.bar:hover .bar-index { opacity: 1; }
 
 .bar-label {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2vw, 1.875rem);
-  font-weight: 400;
+  font-size: clamp(1.5rem, 2.1vw, 2rem);
+  font-weight: 500;
   color: var(--ink);
-  line-height: 1.15;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
   grid-row: 1;
   grid-column: 2;
 }
@@ -324,6 +340,7 @@ body {
 .bar-desc {
   font-family: var(--font-body);
   font-size: 0.875rem;
+  font-weight: 300;
   color: var(--mid);
   line-height: 1.55;
   grid-row: 2;
@@ -331,16 +348,16 @@ body {
   margin-top: 0.3rem;
 }
 
-/* ─── Outside link ────────────────────────────────────────────── */
+/* ─── Outside link ─────────────────────────────────────────────── */
 .outside-link {
   font-family: var(--font-body);
   font-size: 0.6875rem;
   color: var(--mid);
   text-decoration: none;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   align-self: flex-start;
-  transition: color var(--dur-fast) var(--ease-sharp);
+  transition: color 150ms var(--ease-sharp);
 }
 .outside-link:hover { color: var(--ink); }
 .outside-link:focus-visible {
@@ -349,7 +366,7 @@ body {
   border-radius: 2px;
 }
 
-/* ─── Section layout ─────────────────────────────────────────── */
+/* ─── Section layout ───────────────────────────────────────────── */
 .section-back {
   font-family: var(--font-body);
   font-size: 0.6875rem;
@@ -360,9 +377,9 @@ body {
   padding: 0;
   margin-bottom: 4rem;
   display: inline-block;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  transition: color var(--dur-fast) var(--ease-sharp);
+  transition: color 150ms var(--ease-sharp);
 }
 .section-back:hover { color: var(--ink); }
 .section-back:focus-visible {
@@ -373,33 +390,44 @@ body {
 
 .section-header {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 4.8rem);
+  font-weight: 500;
   color: var(--ink);
-  line-height: 0.95;
-  letter-spacing: -0.035em;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
   margin-bottom: 3rem;
 }
 
 .section-placeholder {
   font-family: var(--font-body);
   font-size: 1rem;
+  font-weight: 300;
   color: var(--mid);
 }
 
-/* ─── Mobile (≤ 767px) ────────────────────────────────────────── */
+/* ─── Mobile (≤ 767px) ─────────────────────────────────────────── */
 @media (max-width: 767px) {
   html, body { overflow: auto; height: auto; }
 
   .hub {
     grid-template-columns: 1fr;
-    grid-template-rows: 56vw auto;
+    grid-template-rows: 58vw auto;
     height: auto;
     min-height: 100vh;
   }
 
-  .portrait-col { height: 56vw; }
-  .portrait-col::after { background: linear-gradient(to bottom, transparent 30%, rgba(244,240,232,0.5) 65%, var(--bg) 100%); }
+  .portrait-col {
+    height: 58vw;
+    filter: grayscale(90%) contrast(1.06) brightness(0.68);
+  }
+  .portrait-col::after {
+    background: linear-gradient(
+      to bottom,
+      transparent 25%,
+      rgba(12, 11, 9, 0.55) 60%,
+      #0C0B09 100%
+    );
+  }
   .portrait { object-position: center 15%; }
 
   .content-col {
@@ -408,22 +436,22 @@ body {
     justify-content: flex-start;
   }
 
-  .name { font-size: clamp(2.25rem, 8vw, 3rem); }
-  .tagline-display { font-size: 1.5rem; }
+  .name { font-size: clamp(2.5rem, 9vw, 3.5rem); }
+  .tagline-display { font-size: 1.375rem; }
   .bar-label { font-size: 1.5rem; }
-  .bar:hover { transform: none; }
-  .bar::after { display: none; }
+  .bar { padding-right: 1.5rem; }
+  .bar:hover { background: transparent; }
+  .bar::before, .bar::after { display: none; }
 
   .section { position: static; padding: 2.75rem 2rem; }
   .section--visible { position: fixed; inset: 0; overflow-y: auto; }
 }
 
-/* ─── Tablet (768px – 1023px) ────────────────────────────────── */
+/* ─── Tablet (768–1023px) ──────────────────────────────────────── */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .hub { grid-template-columns: 36fr 64fr; }
-  .content-col { padding: 4rem 4rem 4rem 3.5rem; gap: 2.75rem; }
+  .hub { grid-template-columns: 38fr 62fr; }
+  .content-col { padding: 4rem 4rem 4rem 3.5rem; gap: 3rem; }
 }
-
   </style>
 </head>
 <body>
